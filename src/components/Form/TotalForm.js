@@ -7,25 +7,29 @@ function TotalForm() {
   const [totForm, settotForm] = useState(0);
   return (
     <>
-      <div className="container text-center">
+    
+      <div className="container ">
         {!totForm ? (
-          <h1>Make New Form</h1>
+          <div class="card">
+          <div class="card-header">No form present! Add Form</div>
+        </div>
         ) : (
-          () => {
             <div class="card">
-              <div class="card-header">Featured</div>
-              <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-primary">
-                  Go somewhere
-                </a>
-              </div>
-            </div>;
-          }
+            <div class="card-header">Form title</div>
+            <div class="card-body">
+              <h5 class="card-title">Language</h5>
+              <p class="card-text">
+                Questions MCQ:  
+              </p>
+              <div className="d-flex justify-content-between">
+              <a href="#" class="btn btn-primary">
+                View Responses
+              </a>
+              <a href="#" class="btn btn-primary">
+                Delete
+              </a></div>
+            </div>
+          </div>
         )}
       </div>
       <div>
