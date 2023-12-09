@@ -21,13 +21,16 @@ import myImage from "./Logo.jpeg";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import AutoAwesomeMosaicIcon from "@mui/icons-material/AutoAwesomeMosaic";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { bgcolor } from "@mui/system";
+import { RiLogoutCircleRLine } from "react-icons/ri";
+
 
 const drawerWidth = 240;
 
 function Sidebar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const bgColor = "#482d56";
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -47,15 +50,13 @@ function Sidebar(props) {
       <Toolbar />
       {/* <Divider /> */}
       <List>
-        {["Forms", "Templets"].map((text, index) => (
+        {["Forms", "Templets","Sign Out"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? (
-                  <InsertDriveFileIcon />
-                ) : (
-                  <AutoAwesomeMosaicIcon />
-                )}
+                {text == "Forms"?(<InsertDriveFileIcon />):text == "Templets"? (<AutoAwesomeMosaicIcon />):(<RiLogoutCircleRLine />)}
+
+                 
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -120,6 +121,7 @@ function Sidebar(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor:bgcolor,
             },
           }}
         >

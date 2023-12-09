@@ -10,22 +10,22 @@ function TotalForm() {
     
       <div className="container ">
         {!totForm ? (
-          <div class="card">
-          <div class="card-header">No form present! Add Form</div>
+          <div className="card">
+          <div className="card-header">No form present! Add Form</div>
         </div>
         ) : (
-            <div class="card">
-            <div class="card-header">Form title</div>
-            <div class="card-body">
-              <h5 class="card-title">Language</h5>
-              <p class="card-text">
+            <div className="card">
+            <div className="card-header">Form title</div>
+            <div className="card-body">
+              <h5 className="card-title">Language</h5>
+              <p className="card-text">
                 Questions MCQ:  
               </p>
               <div className="d-flex justify-content-between">
-              <a href="#" class="btn btn-primary">
+              <a href="#" className="btn btn-primary">
                 View Responses
               </a>
-              <a href="#" class="btn btn-primary">
+              <a href="#" className="btn btn-primary">
                 Delete
               </a></div>
             </div>
