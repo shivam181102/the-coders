@@ -16,8 +16,9 @@ function Form() {
       
       <BrowserRouter>
                     <Routes>
+                        <Route exact path='/TotalForm' element={<TotalForm />}/>
                         <Route index path='/' element={<TotalForm />}/>
-                        <Route path='/FormItem' element={<FormItem />}/>
+                        <Route exact path='/FormItem' element={<FormItem />}/>
                     </Routes>
                 </BrowserRouter>
      

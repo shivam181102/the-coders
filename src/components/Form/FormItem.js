@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import data from "../data.json";
 import QuestionType from "./QuestionType";
 import Email from "./Email";
 import DateTime from "./DateTime";
+import { Outlet, Link } from "react-router-dom";
+
 function FormItem() {
   // console.log(data)
+  const formRef = useRef(null);
   const handleSubmit = (e) => {
     e.preventDefault();
+    formRef.current.reset()
     console.log(mcq.question,mcq.marks,code.question,code.marks,fill.question,fill.marks)
     console.log(e);
   };
@@ -44,7 +48,7 @@ function FormItem() {
   }, [mcq, code, fill]);
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form ref={formRef} onSubmit={handleSubmit}>
         <div className="input mb-3">
           <span className="input-text" id="inputGroup-sizing-default">
             Enter Exam Name
@@ -116,9 +120,11 @@ function FormItem() {
         <DateTime />
         <div className="col-12">
           <br />
+          <Link to="/TotalForm" >
           <button type="Submit" className="btn btn-primary text-center">
             Make Form
-          </button>
+          </button></Link>
+          <Outlet/>
         </div>
       </form>
     </div>

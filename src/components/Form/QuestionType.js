@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 function QuestionType(props) {
     // console.log(props)
     const handleInputChange1 = (e) => {
