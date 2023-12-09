@@ -6,18 +6,19 @@ import AddIcon from "@mui/icons-material/Add";
 import {
   BrowserRouter,
   Route,
-  Routes,
+  Routes,Link
 } from "react-router-dom";
 
 function Form() {
   return (
     <div>
-      {/* <Fab color="primary" id="floating-button" aria-label="add">
+      <Link rel="stylesheet" to="/FormItem" />
+      <Fab color="primary" id="floating-button" aria-label="add">
         <AddIcon />
-      </Fab> */}
+      </Fab>
       <BrowserRouter>
                     <Routes>
-                        <Route path='/addQuestions' element={<AddQuestions />}></Route>
+                        <Route path='/FormItem' element={<FormItem />}></Route>
                     </Routes>
                 </BrowserRouter>
       <FormItem/>
