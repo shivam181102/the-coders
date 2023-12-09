@@ -8,20 +8,19 @@ import {
   Route,
   Routes,Link
 } from "react-router-dom";
+import TotalForm from "./Form/TotalForm";
 
 function Form() {
   return (
     <div>
-      <Link rel="stylesheet" to="/FormItem" />
-      <Fab color="primary" id="floating-button" aria-label="add">
-        <AddIcon />
-      </Fab>
+      
       <BrowserRouter>
                     <Routes>
-                        <Route path='/FormItem' element={<FormItem />}></Route>
+                        <Route index path='/' element={<TotalForm />}/>
+                        <Route path='/FormItem' element={<FormItem />}/>
                     </Routes>
                 </BrowserRouter>
-      <FormItem/>
+     
     </div>
   );
 }

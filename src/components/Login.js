@@ -1,9 +1,23 @@
 import React,{useState} from "react";
 import './Login.css'
+import axios from "axios"
 
 function Login() {
   const [isSignIn, setIsSignIn] = useState(true);
-
+  const [formData, setFormData] = useState({
+    email:"",
+    password:""
+  });
+  const baseURL= "https://a570-182-48-224-214.ngrok-free.app"
+ const handleForm=async()=>{
+    await axios.post(baseURL, formData)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+ }
   const handleSwitchForm = () => {
     setIsSignIn((prevIsSignIn) => !prevIsSignIn);
   };
@@ -22,13 +36,13 @@ function Login() {
           </div>
           {isSignIn || (
             <div className="form-group">
-              <input type="email" required />
+              <input type="email" onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
               <i className="fas fa-at"></i>
               <label htmlFor="">Email</label>
             </div>
           )}
           <div className="form-group">
-            <input type="password" required />
+            <input type="password"onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
             <i className="fas fa-lock"></i>
             <label htmlFor="">Password</label>
           </div>
