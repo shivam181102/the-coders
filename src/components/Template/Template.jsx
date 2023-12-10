@@ -91,7 +91,7 @@ const Template = () => {
         
     });
 }
-con
+
 const showquestion= async(temp_id)=>{
     const response =await axios
       .get(`${baseURL}/api/temp/${temp_id}`, {
