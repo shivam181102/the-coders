@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Outlet, Link } from "react-router-dom";
-import "./AddFormBtn.css";
+import "../AddFormBtn.css";
 function TotalForm() {
   const [totForm, settotForm] = useState(0);
   return (
-    <>
+    <div className="mt-6">
     
-      <div className="container ">
+      <div className="container " >
         {!totForm ? (
           <div className="card">
           <div className="card-header">No form present! Add Form</div>
@@ -33,14 +33,14 @@ function TotalForm() {
         )}
       </div>
       <div>
-        <Link to="/FormItem">
+        <Link to={"/Form/FormItem"}>
           <Fab color="primary" id="floating-button" aria-label="add">
             <AddIcon />
           </Fab>
         </Link>
-        <Outlet />
       </div>
-    </>
+        <Outlet />
+    </div>
   );
 }
 

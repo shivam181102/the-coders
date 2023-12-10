@@ -1,27 +1,21 @@
 import React from "react";
 import FormItem from "./Form/FormItem";
+import TotalForm from "./Form/TotalForm";
 import "./Sidebar.css";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import {
-  BrowserRouter,
-  Route,
-  Routes,Link
-} from "react-router-dom";
-import TotalForm from "./Form/TotalForm";
+import { Outlet, useNavigate, Route, Routes } from "react-router-dom";
+
 
 function Form() {
+  
   return (
     <div>
-      
-      <BrowserRouter>
-                    <Routes>
-                        <Route exact path='/TotalForm' element={<TotalForm />}/>
-                        <Route index path='/' element={<TotalForm />}/>
-                        <Route exact path='/FormItem' element={<FormItem />}/>
-                    </Routes>
-                </BrowserRouter>
-     
+      <Routes>
+        <Route index element={<TotalForm />} />
+              <Route exact path="/Sidebar/Form/TotalForm" element={<TotalForm />} />
+              <Route exact path="/Sidebar/Form/FormItem" element={<FormItem />} />        
+              </Routes>
     </div>
   );
 }

@@ -120,13 +120,13 @@ function FormItem() {
         <DateTime />
         <div className="col-12">
           <br />
-          <Link to="/TotalForm" >
+          <Link to="/Form/TotalForm" >
           <button type="Submit" className="btn btn-primary text-center">
             Make Form
           </button></Link>
-          <Outlet/>
         </div>
       </form>
+          <Outlet/>
     </div>
   );
 }

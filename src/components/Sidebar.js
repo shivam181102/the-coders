@@ -23,7 +23,12 @@ import AutoAwesomeMosaicIcon from "@mui/icons-material/AutoAwesomeMosaic";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { bgcolor } from "@mui/system";
 import { RiLogoutCircleRLine } from "react-icons/ri";
+import axios from "axios";
+import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import Template from "./Template/Template";
 
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -34,6 +39,44 @@ function Sidebar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const handleNav=()=>{
+    console.log("called")
+    window.open('http://192.168.56.1:3000/Form','_blank')
+  }
+
+  const handleNav2=()=>{
+    console.log(' callled ');    window.open('http://192.168.56.1:3000/Template')
+  }
+  const baseURL = "https://18b8-182-48-224-214.ngrok-free.app";
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("token"),
+    // "ngrok-skip-browser-warning": true
+  };
+  const [userName, setuserName] = useState("");
+  const handleForm = async (e) => {
+    const response = await axios
+      .get(`${baseURL}/api/user`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          "ngrok-skip-browser-warning": true,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data);
+        setuserName(response.data.data.name);
+      })
+      .catch(function (error) {
+        console.log(error);
+        // alert(error.msg);
+      });
+  };
+  React.useEffect(() => {
+    handleForm();
+  }, []);
+
+
+
   const divStyle = {
     backgroundImage: `url(${myImage})`,
     backgroundSize: "cover", // or 'contain', depending on your needs
@@ -50,16 +93,23 @@ function Sidebar(props) {
       <Toolbar />
       {/* <Divider /> */}
       <List>
-        {["Forms", "Templets","Sign Out"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+        {["Form", "Template", "SignOut"].map((text, index) => (
+          <ListItem key={index} disablePadding>
+            <Link to={`/${text}`}>
+            <ListItemButton >
               <ListItemIcon>
-                {text == "Forms"?(<InsertDriveFileIcon />):text == "Templets"? (<AutoAwesomeMosaicIcon />):(<RiLogoutCircleRLine />)}
-
-                 
+                {text == "Form" ? (
+                  <InsertDriveFileIcon />
+                ) : text == "Template" ? (
+                  <AutoAwesomeMosaicIcon />
+                ) : (
+                  <RiLogoutCircleRLine />
+                )}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
+            </Link>
+            <Outlet />
           </ListItem>
         ))}
       </List>
@@ -98,7 +148,7 @@ function Sidebar(props) {
           </Toolbar>
           <div className="d-flex justify-content-start align-items-center me-3">
             <AccountCircleIcon sx={{ fontSize: 40 }} />
-            <p className="mb-0">USERNAME</p>
+            <p className="mb-0">{userName}</p>
           </div>
         </div>
       </AppBar>
@@ -121,7 +171,7 @@ function Sidebar(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor:bgcolor,
+              backgroundColor: bgcolor,
             },
           }}
         >
@@ -150,8 +200,7 @@ function Sidebar(props) {
         }}
       >
         <Toolbar />
-
-        <Form />
+        
       </Box>
     </Box>
   );

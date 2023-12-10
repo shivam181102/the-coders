@@ -1,22 +1,53 @@
 import React,{useState} from "react";
 import './Login.css'
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import { Alert } from "@mui/material";
+// import { useHistory } from 'react-router-dom'
 
-function Login() {
+function Login(props) {
   const [isSignIn, setIsSignIn] = useState(true);
-  const [formData, setFormData] = useState({
+  const [loginData, setloginData] = useState({
+      name:"",
     email:"",
     password:""
   });
-  const baseURL= "https://a570-182-48-224-214.ngrok-free.app"
- const handleForm=async()=>{
-    await axios.post(baseURL, formData)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
+  const navigate = useNavigate()
+//   const history = useHistory();
+  
+  const baseURL= "https://18b8-182-48-224-214.ngrok-free.app"
+  const header ={
+    "ngrok-skip-browser-warning": true
+  }
+ const handleForm=async(e)=>{
+     console.log(loginData);
+     e.preventDefault();
+    if (!isSignIn) {
+        const response= await axios.post(`${baseURL}/api/register`, loginData,{header})
+     .then(function (response) {
+        // localStorage.setItem("token",response.data.token);
+        console.log(response.data);
+        // history.push('/Sidebar');
+        
+    })
+    .catch(function (error) {
         console.log(error);
-      });
+        alert(error.msg);
+    });
+}else{ 
+    const response= await axios.post(`${baseURL}/api/login`, loginData,{header})
+    .then(function (response) {
+        localStorage.setItem("token",response.data.token);
+        console.log(response.data.token);
+        navigate('/Form/TotalForm');
+        props.loginstate(isSignIn);
+        //  navigate('/');
+
+        })
+        .catch(function (error) {
+            console.log(error);
+            alert(error.msg);
+        });}
  }
   const handleSwitchForm = () => {
     setIsSignIn((prevIsSignIn) => !prevIsSignIn);
@@ -24,25 +55,27 @@ function Login() {
 
   return (
     <div
-      className={`wrapper ${isSignIn ? "animated-signin" : "animated-signup"}`}
+      className={`wrapper ${isSignIn ? "animated-signin" : "animated-signup"} loginbox`}
     >
+        
       <div className={`form-container ${isSignIn ? "sign-in" : "sign-up"}`}>
-        <form action="#">
+        <form onSubmit={handleForm}>
           <h2>{isSignIn ? "Login" : "Sign Up"}</h2>
+          {isSignIn || (
           <div className="form-group">
-            <input type="text" required />
+            <input type="text" required onChange={(e) => setloginData({ ...loginData, name: e.target.value })} />
             <i className="fas fa-user"></i>
             <label htmlFor="">Username</label>
           </div>
-          {isSignIn || (
+          )}
             <div className="form-group">
-              <input type="email" onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+              <input type="email" onChange={(e) => setloginData({ ...loginData, email: e.target.value })} required />
               <i className="fas fa-at"></i>
               <label htmlFor="">Email</label>
             </div>
-          )}
+          
           <div className="form-group">
-            <input type="password"onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
+            <input type="password"onChange={(e) => setloginData({ ...loginData, password: e.target.value })} required />
             <i className="fas fa-lock"></i>
             <label htmlFor="">Password</label>
           </div>
