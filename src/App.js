@@ -12,7 +12,7 @@ function App() {
   const [logedin, setlogedin] = useState(false);
   return (
     <>
-      {logedin?(<Sidebar/>):null}
+      {logedin?(<Sidebar logstate={setlogedin}/>):null}
       {/* <Sidebar/> */}
       <div style={{width:'100vw',text:'center'}}>
       <div style={{marginLeft:'27%', width:'80%'}}>
@@ -23,6 +23,7 @@ function App() {
           <Route exact path="/Form/FormItem" element={<FormItem />} />
           <Route exact path="/Form/TotalForm" element={<TotalForm />} />
           <Route exact path="/Template" element={<Template />} />
+          {/* <Route exact path="/" element={<Template />} /> */}
         {/* </Route> */}
       </Routes>
       </div>

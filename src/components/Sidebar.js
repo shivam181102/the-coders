@@ -39,7 +39,7 @@ function Sidebar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+const navigate = useNavigate()
   const handleNav=()=>{
     console.log("called")
     window.open('http://192.168.56.1:3000/Form','_blank')
@@ -87,13 +87,18 @@ function Sidebar(props) {
     height: "65px", // Adjust the height as needed
     // Other styles...
   };
+  const handlelogout=()=>{
+    localStorage.removeItem('token');
+    props.logstate(false)
+    navigate('/')
+  }
   const drawer = (
     <div>
       <div style={divStyle}></div>
       <Toolbar />
       {/* <Divider /> */}
       <List>
-        {["Form", "Template", "SignOut"].map((text, index) => (
+        {["Form", "Template"].map((text, index) => (
           <ListItem key={index} disablePadding>
             <Link to={`/${text}`}>
             <ListItemButton >
@@ -103,7 +108,7 @@ function Sidebar(props) {
                 ) : text == "Template" ? (
                   <AutoAwesomeMosaicIcon />
                 ) : (
-                  <RiLogoutCircleRLine />
+                  <RiLogoutCircleRLine onClick={handlelogout}/>
                 )}
               </ListItemIcon>
               <ListItemText primary={text} />
@@ -112,6 +117,17 @@ function Sidebar(props) {
             <Outlet />
           </ListItem>
         ))}
+        <ListItem disablePadding>
+             
+            <ListItemButton onClick={handlelogout}> 
+              <ListItemIcon>
+                  <RiLogoutCircleRLine />
+              </ListItemIcon>
+              <ListItemText primary={'Sign Out'} />
+            </ListItemButton>
+            
+            <Outlet />
+          </ListItem>
       </List>
       <Divider />
     </div>

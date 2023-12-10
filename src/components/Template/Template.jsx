@@ -91,7 +91,7 @@ const Template = () => {
         
     });
 }
-
+const [question, setquestion] = useState()
 const showquestion= async(temp_id)=>{
     const response =await axios
       .get(`${baseURL}/api/temp/${temp_id}`, {
@@ -101,7 +101,8 @@ const showquestion= async(temp_id)=>{
         },
       })
       .then(function (response) {
-        console.log(response)
+        setquestion(response.data.data.mcq)
+        console.log(response.data.data.mcq)
     })
     .catch(function (error) {
         console.log(error);
@@ -111,13 +112,7 @@ const showquestion= async(temp_id)=>{
 useEffect(()=>{
     tempApi();
 },[])
-const Addtemplets=()=>{
-    console.log(tmplates)
-    return tmplates.map((data,index)=>{
-        
-    })
-      
- }
+
 
     return (
         <div>
@@ -137,20 +132,7 @@ const Addtemplets=()=>{
         </div>
       </div>
     }) }
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      
-    </div>
-  </div>
-</div>
+    
       </div>
             <div className="mt-5 modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
