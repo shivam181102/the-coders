@@ -35,7 +35,7 @@ const Template = () => {
             const response = await axios.post(`${baseurl}/api/excel`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwidXB0IjoxNzAyMTg3MDMxNjE4LCJpYXQiOjE3MDIxOTQzNzh9.m5cjJIAFwH-u51lj1qxvHkwr4e_e9N_iudg0iis-Dn8'
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                 },
             });
             setTemplataeData({ temp_name: temp_name, mcq: response.data.data.mcq, code: response.data.data.code, fill: response.data.data.fill})
@@ -57,7 +57,7 @@ const Template = () => {
         try {
             const upload = await axios.post(`${baseurl}/api/temp`, templateData, {
                 headers: {
-                    'Authorization': "Bearer " + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwidXB0IjoxNzAyMTg3MDMxNjE4LCJpYXQiOjE3MDIxOTQzNzh9.m5cjJIAFwH-u51lj1qxvHkwr4e_e9N_iudg0iis-Dn8'
+                    'Authorization': "Bearer " + localStorage.getItem('token')
                 }
             }).then((res) => [
                 console.log(res.data.message)
@@ -125,7 +125,7 @@ useEffect(()=>{
         <div className="card-header">{data.temp_name} shiam</div>
         <div className="card-body">
           <div className="d-flex justify-content-between">
-          <button onClick={()=>showquestion(data.temp_id)} className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button onClick={()=>showquestion(data.temp_id)} className="btn btn-primary" >
             View Responses
           </button>
           </div>

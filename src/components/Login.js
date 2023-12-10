@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import './Login.css'
+// import './Login.css'
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
@@ -55,26 +55,25 @@ function Login(props) {
 
   return (
     <div
-      className={`wrapper ${isSignIn ? "animated-signin" : "animated-signup"} loginbox`}
+      className={`wrapper ${isSignIn ? "animated-signin" : "animated-signup"} loginbox`} style={{display:'flex', marginLeft:'8rem', marginTop:'10rem'}}
     >
-        
-      <div className={`form-container ${isSignIn ? "sign-in" : "sign-up"}`}>
-        <form onSubmit={handleForm}>
+      <div className={`form-container ${isSignIn ? "sign-in" : "sign-up"}`}  >
+        <form onSubmit={handleForm} style={{display:'flex', flexDirection:'column',padding:'2rem' , border:'2px solid black', gap:'1rem'}} >
           <h2>{isSignIn ? "Login" : "Sign Up"}</h2>
           {isSignIn || (
-          <div className="form-group">
+          <div className="form-group" >
             <input type="text" required onChange={(e) => setloginData({ ...loginData, name: e.target.value })} />
             <i className="fas fa-user"></i>
             <label htmlFor="">Username</label>
           </div>
           )}
-            <div className="form-group">
+            <div className="form-group" style={{display:'flex', flexDirection:'column-reverse'}}>
               <input type="email" onChange={(e) => setloginData({ ...loginData, email: e.target.value })} required />
               <i className="fas fa-at"></i>
               <label htmlFor="">Email</label>
             </div>
           
-          <div className="form-group">
+          <div className="form-group" style={{display:'flex', flexDirection:'column-reverse'}}>
             <input type="password"onChange={(e) => setloginData({ ...loginData, password: e.target.value })} required />
             <i className="fas fa-lock"></i>
             <label htmlFor="">Password</label>
