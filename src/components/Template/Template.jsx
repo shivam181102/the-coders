@@ -170,14 +170,14 @@ useEffect(()=>{
                                     {selectedOption === 'manual' && (
                                         <>
                                             <div className="manual">
-                                                <p><a href="/template/addQuestions" className="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add Questions </a></p>
+                                                <p data-bs-dismiss="modal" aria-label="Close"><Link to="/AddQuestions" className="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add Questions </Link></p>
                                             </div>
                                         </>
                                     )}
                                 </div>
                                 <br />
                                 <div className="modal-footer">
-                                    <button type="submit" className="btn btn-primary">
+                                    <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
                                         Add template
                                     </button>
                                 </div>

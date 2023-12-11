@@ -57,21 +57,18 @@ const AddQuestions = () => {
         setError('');
     };
 
-    const sendToApi = () => {
+    const sendToApi =async () => {
         const apiEndpoint = 'https://18b8-182-48-224-214.ngrok-free.app/api/temp';
         const requestData = {
-            template_name: templateName,
+            temp_name: templateName,
             mcq: submittedQuestions,
         };
-        axios.post(apiEndpoint, requestData)
+       const respomse = await axios.post(apiEndpoint, requestData,{ headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },})
             .then((response) => {
-                console.log('API Response:', response.data,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwidXB0IjoxNzAyMTg3MDMxNjE4LCJpYXQiOjE3MDIxOTQzNzh9.m5cjJIAFwH-u51lj1qxvHkwr4e_e9N_iudg0iis-Dn8'
-                        },
-                    });
+                console.log('API Response:', response.data);
                 setSubmittedQuestions([]);
             })
             .catch((error) => {
@@ -203,7 +200,8 @@ const AddQuestions = () => {
                                                 </strong>
                                             </span>
                                             <strong>Question:</strong> {q.question} <br />
-                                            <strong>Options:</strong> {q.opt1}, {q.opt2}, {q.opt3}, {q.opt4}
+                                            <strong>Options:</strong> {q.opt1}, {q.opt2}, {q.opt3}, {q.opt4} <br />
+                                            <strong>Answer:</strong>{q.sol}
                                         </li>
 
                                     </div>

@@ -61,10 +61,11 @@ function Login(props) {
         <form onSubmit={handleForm} style={{display:'flex', flexDirection:'column',padding:'2rem' , border:'2px solid black', gap:'1rem'}} >
           <h2>{isSignIn ? "Login" : "Sign Up"}</h2>
           {isSignIn || (
-          <div className="form-group" >
+              <div className="form-group" >
+              <label htmlFor="">Username</label>
+              <br />
             <input type="text" required onChange={(e) => setloginData({ ...loginData, name: e.target.value })} />
             <i className="fas fa-user"></i>
-            <label htmlFor="">Username</label>
           </div>
           )}
             <div className="form-group" style={{display:'flex', flexDirection:'column-reverse'}}>
@@ -79,10 +80,11 @@ function Login(props) {
             <label htmlFor="">Password</label>
           </div>
           {!isSignIn && (
-            <div className="form-group">
+              <div className="form-group">
+                <label htmlFor="">Confirm Password</label>
+                <br />
               <input type="password" required />
               <i className="fas fa-lock"></i>
-              <label htmlFor="">Confirm Password</label>
             </div>
           )}
           {isSignIn ? (

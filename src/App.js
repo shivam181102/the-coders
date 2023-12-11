@@ -7,6 +7,7 @@ import Form from "./components/Form";
 import Template from "./components/Template/Template";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import AddQuestions from './components/Template/AddQuestions'
 
 function App() {
   const [logedin, setlogedin] = useState(false);
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/Form/FormItem" element={<FormItem />} />
           <Route exact path="/Form/TotalForm" element={<TotalForm />} />
           <Route exact path="/Template" element={<Template />} />
+          <Route exact path="/AddQuestions" element={<AddQuestions />} />
           {/* <Route exact path="/" element={<Template />} /> */}
         {/* </Route> */}
       </Routes>
